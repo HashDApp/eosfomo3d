@@ -1,6 +1,6 @@
 # eosfomo3d
 
-这个一款在EOS上实现的FOMO 3D游戏  
+这是一款在EOS上实现的FOMO 3D游戏  
 如有错误之处，请多多指教，谢谢  
 
 # EOS版FOMO 3D
