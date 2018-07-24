@@ -118,7 +118,7 @@ namespace hashdapp {
 
     private:
         void team_init();
-        void update_key_price(const uint64_t team_id);
+        void update_key_price(const uint64_t team_id, const uint64_t amount);
         uint64_t get_random_num(account_name last, account_name curr, uint64_t max);
         uint64_t team_bonus_ratio(uint64_t id);
         uint64_t team_airdrop_ratio(uint64_t id);

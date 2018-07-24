@@ -69,9 +69,7 @@ namespace hashdapp {
             usebonus(from, team_id, amount);
         }
 
-
-        update_key_price(team_id);
-
+        update_key_price(team_id, amount);
     }
 
     void fomo3d::reward(const account_name from, const uint64_t team_id, const uint64_t amount)
@@ -94,6 +92,10 @@ namespace hashdapp {
         eosio_assert(act_itr->eos_balance.amount >= cost, "insufficient balance");
         auto cost_quantity = asset(cost, S(4, EOS));
         print("cost quantity: ", cost_quantity, ",    ");
+
+        accounts.modify(act_itr, from, [&](auto & a) {
+                a.eos_balance -= cost_quantity;
+            });
 
         teams.modify(team_itr, from, [&](auto & t) {
                 t.prize_pool += cost_quantity;
@@ -214,13 +216,13 @@ namespace hashdapp {
         return r;
     }
 
-    void fomo3d::update_key_price(const uint64_t team_id)
+    void fomo3d::update_key_price(const uint64_t team_id, const uint64_t amount)
     {
         auto itr = teams.find(team_id);
 
         // TODO: use bancor
         teams.modify(itr, 0, [&](auto & t) {
-                    t.key_price += 1;
+                    t.key_price += amount;
                 });
     }
 
