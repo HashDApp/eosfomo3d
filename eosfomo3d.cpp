@@ -50,6 +50,24 @@ namespace hashdapp {
             accounts.modify(itr, from, [&](auto& acnt) {
                     acnt.eos_balance += quantity;
                 });
+
+            // log to the chain
+            string log = "";
+            log.append(to_string(current_time()));
+            log.append(",");
+            log.append(name{_self}.to_string());
+            log.append(",");
+            log.append(name{from}.to_string());
+            log.append(",");
+            log.append("deposit");
+            log.append(",");
+            log.append(to_string(quantity.amount));
+
+            action(
+                permission_level{ _self, N(active) },
+                N(datalog), N(log),
+                std::make_tuple(_self, log)
+            ).send();
         }
     }
 
