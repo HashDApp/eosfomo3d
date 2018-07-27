@@ -6,6 +6,7 @@
 
 ## 记录日志
 日志字符串的格式可以自定义  
+方便数据分析即可  
 ```
 cleos push action datalog log '["datalog", "id,username,amount,notes"]' -p datalog@active
 ```
